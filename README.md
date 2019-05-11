@@ -14,7 +14,7 @@ Example usage:
 
 1. Starting Excel
 
-```
+``` c#
 using ExcelFacade;
 using Application = ExcelFacade.Application;
 
@@ -32,7 +32,7 @@ public void CreateReport()
 
 2. Open an existing workbook
 
-```
+``` c#
 var workBook = excel.Workbooks.Add(filename);
 var workSheet = workBook.Worksheets[1]; // all collections are 1 based, which is not the usual c# way
 workSheet.Activate();
@@ -46,7 +46,7 @@ r.HorizontalAlignment = XlHAlign.xlHAlignCenter;
 
 3. Create a new workbook
 
-```
+``` c#
 var workBook = excel.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
 var workSheet = workBook.Worksheets[1];
 
@@ -58,7 +58,7 @@ ws.DisplayPageBreaks = false; // helps speed things up
 ```
 
 4. Page setup
-```
+``` c#
 public static void ExcelPageSetup(Worksheet ws)
   {
   // this routine will fail if no printer is available - check if excel.ActivePrinter.StartsWith("unknown") to avoid an exception
@@ -73,6 +73,9 @@ public static void ExcelPageSetup(Worksheet ws)
   decimal excelVersion = decimal.Parse(ws.Application.Version);
   try
     {
+    // In early versions of Excel each change to the printing properties results in a conversation with the printer
+    // which is pretty slow. Later versions of Excel can speed things up by turning of PrintCommunication
+    // until all changes to the printer settings have been made.
     if (excelVersion >= 14)
         ws.Application.PrintCommunication = false;
 
