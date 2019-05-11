@@ -1,4 +1,4 @@
-Imports JetBrains.Annotations
+﻿Imports JetBrains.Annotations
 
 Public NotInheritable Class Application
     Private ReadOnly _app As Object
