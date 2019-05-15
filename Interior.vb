@@ -1,4 +1,4 @@
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports JetBrains.Annotations
 
 Public NotInheritable Class Interior
@@ -46,16 +46,16 @@ Public NotInheritable Class Interior
     ''' </summary>
     ''' <returns>A LinearGradient object, or a RectangularGradient object.</returns>
     Public ReadOnly Property Gradient as Gradient
-        get
-            Dim comObject as object = Me._interior.Gradient
-            if comObject Is nothing Then
-                Return nothing
+        Get
+            Dim comObject As Object = Me._interior.Gradient
+            If comObject Is Nothing Then
+                Return Nothing
             End If
-            if TypeName(comObject) = "LinearGradient" Then
+            If GetComTypeName(comObject) = "LinearGradient" Then
                 ' Should be true if Pattern = xlPatternLinearGradient
-                return New LinearGradient(comObject)
-            end If
-            If TypeName(comObject) = "RectangularGradient" Then
+                Return New LinearGradient(comObject)
+            End If
+            If GetComTypeName(comObject) = "RectangularGradient" Then
                 ' Should be true if Pattern = xlPatternRectangularGradient
                 Return New RectangularGradient(comObject)
             End If

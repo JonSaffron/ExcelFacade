@@ -1,4 +1,4 @@
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports JetBrains.Annotations
 
 Public MustInherit Class Sheet
@@ -17,7 +17,7 @@ Public MustInherit Class Sheet
     End Property
 
     Friend Shared Function CreateSheetObject(ByVal underlyingComObject As Object) As Sheet
-        Dim objectTypeName As String = TypeName(underlyingComObject)
+        Dim objectTypeName As String = GetComTypeName(underlyingComObject)
         Dim result As Sheet
         Select Case objectTypeName
             Case "Worksheet" : result = New Worksheet(underlyingComObject)
